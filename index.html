@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Trending Keywords</title>
+		<link href="./main.css" rel="stylesheet" />
+	</head>
+
+	<body
+		class="flex flex-col items-center justify-start bg-darken w-screen h-screen p-10"
+	>
+		<div class="flex items-center justify-center flex-col space-y-10">
+			<input
+				type="tex"
+				name="admin-name"
+				id="admin-name"
+				placeholder="What's your full name ?"
+				class="w-full placeholder:text-hot outline-none pr-3 py-2 bg-transparent border-b-2 border-hot text-hot font-light"
+			/>
+			<div class="relative flex items-center justify-center w-full flex-col">
+				<div class="relative flex items-center justify-center space-x-4">
+
+						<h2 class="text-hot font-medium">What's your role in your startup ?</h2>
+						<div class="relative flex items-center justify-center">
+							<div class="relative flex items-center justify-center rounded-md">
+								<div id="dropdownButton" class="flex items-center justify-center space-x-5 appearance-none bg-transparent border border-hot  rounded-md rounded-b-sm px-4 py-2 text-sm text-hot text-center font-medium sh5 ">
+									<span class="font-medium ml-3">Roles</span>
+									
+									<span class=" flex items-center pr-2 pointer-events-none">
+										<img src="icons/briefcase.png" alt="dropdown icon" class="w-5 h-5" />
+									</span>
+								</div>
+								<div id="dropdownMenu" class="absolute flex  items-center justify-center text-sm   mt-2 w-full top-8 sh5">
+									<ul class="w-full items-center justify-center flex">
+										<li class="w-full items-center justify-center flex"><div class="flex items-center justify-center px-4 py-2 hover:bg-dark w-full text-white">Admin</div></li>
+										<!-- Add more options as needed -->
+									</ul>
+								</div>
+							</div>
+							
+					
+						
+					
+				</div>
+			</div>
+		</div>
+
+		<script type="module" src="/src/main.ts"></script>
+		<script>
+			document.getElementById('dropdownButton').addEventListener('click', function() {
+				const menu = document.getElementById('dropdownMenu');
+				menu.classList.toggle('hidden');
+			});
+		</script>
+	</body>
+</html>

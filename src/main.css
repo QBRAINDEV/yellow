@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+	.sh5 {
+		box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+	}
+    .sh22 {
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    }
+
+    .sh4 {
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px; }
+
+    .keyword-item {
+    @apply flex items-center justify-center px-3 py-1.5  sh22 text-center rounded-sm border-bluehok border text-bluehok text-[0.7rem] m-1.5
+    }
+
+    select {
+			background: none; /* Removes the default background */
+			padding-right: 2.5em; /* Adds space for the custom icon */
+		}
+	
+		select::-ms-expand {
+			display: none; /* Hides the default arrow in IE and Edge */
+		}
+}
+
