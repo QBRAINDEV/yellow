@@ -1,20 +1,50 @@
-import { handleAddUser, toggleDropdown } from './components/user_info_ui';
+import { handleAddUser } from './components/user_info_ui';
 
 document.addEventListener('DOMContentLoaded', () => {
-	document.querySelectorAll("#user-roles .dropdown-item").forEach(item => {
-		item.addEventListener("click", handleAddUser);
-	});
-	
-    const addButton = document.getElementById('add-user');
-    if (addButton) {
-        addButton.addEventListener('click', handleAddUser);
-    } else {
-        console.error('Add User button not found.');
-    }
+    const userRolesContainer = document.getElementById('user-roles-container') as HTMLElement;
+    const userRoles = document.getElementById('user-roles') as HTMLElement;
 
-    // Attach event listeners for dropdown and role selection
-    document.querySelector('#user-role')?.addEventListener('click', toggleDropdown);
-    // document.querySelectorAll('#user-roles .role-item').forEach(item => {
-    //     item.addEventListener('click', selectRole);
-    // });
+    // Function to show the dropdown
+    const showDropdown = () => {
+        userRoles.classList.remove('hidden');
+    };
+
+    // Function to hide the dropdown
+    const hideDropdown = () => {
+        userRoles.classList.add('hidden');
+    };
+
+    // Show dropdown on hover or click
+    userRolesContainer.addEventListener('mouseenter', () => {
+        showDropdown();
+    });
+
+    userRolesContainer.addEventListener('click', (event) => {
+        showDropdown();
+    });
+
+    // Hide dropdown when the mouse leaves the container and the dropdown
+    userRolesContainer.addEventListener('mouseleave', (event) => {
+        if (!userRoles.contains(event.relatedTarget as Node)) {
+            hideDropdown();
+        }
+    });
+
+    // Hide the dropdown when a dropdown item is clicked
+    document.querySelectorAll("#user-roles .dropdown-item").forEach(item => {
+        item.addEventListener("click", (event) => {
+            handleAddUser(event);
+            hideDropdown(); // Hide dropdown after selecting an item
+        });
+    });
+
+    // Hide the dropdown if clicking anywhere outside of #user-roles-container and its children
+    document.addEventListener('click', (event) => {
+        const target = event.target as Node;
+
+        // Check if the click is outside the container or its children
+        if (!userRolesContainer.contains(target)) {
+            hideDropdown();
+        }
+    });
 });

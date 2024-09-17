@@ -64,10 +64,10 @@ export function renderUser(user: { name: string; role: string }) {
         userItem.setAttribute('data-user-id', userId.toString());
 
         userItem.innerHTML = `
-            <div class="user-name flex items-center justify-center text-bluehok text-xs mr-auto">${user.name}</div>
-            <div class="user-role flex items-center justify-center text-xs text-hot">${user.role}</div>
-            <div class="remove-user-from-list flex items-center justify-center cursor-pointer" data-user-id="${userId}">
-                <img src="icons/remove.png" alt="remove icon" class="w-5 h-5 mx-5" />
+            <div class="user-name flex items-center justify-center text-bluehok text-sm mr-auto">${user.name}</div>
+            <div class="user-role flex items-center justify-center text-sm text-hot">${user.role}</div>
+            <div class="remove-user-from-list hover:bg-hot w-6 h-6 mx-5 rounded-full flex items-center justify-center cursor-pointer" data-user-id="${userId}">
+                <img src="icons/remove.png" alt="remove icon" class="w-5 h-5" />
             </div>
         `;
 

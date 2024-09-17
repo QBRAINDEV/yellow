@@ -17,32 +17,26 @@
             class="w-full placeholder:text-hot outline-none pr-3 py-2 bg-transparent border-b-2 border-hot text-hot font-light placeholder:text-xs text-sm"
         />
         <div class="relative flex items-center justify-center w-full flex-col">
-            <div class="relative flex items-center justify-center space-x-4">
+            <div  class="relative flex items-center justify-center space-x-4">
                 <h2 class="text-hot font-medium text-xs">What do you do?</h2>
-                <div  class="relative flex items-center justify-center space-x-5 appearance-none bg-transparent border border-hot rounded-md rounded-b-sm px-4 py-2 text-sm text-hot text-center font-medium sh5" data-role="">
+                <div id="user-roles-container"  class="relative flex items-center justify-center space-x-5 appearance-none bg-transparent border border-hot rounded-md rounded-b-sm px-4 py-2 text-sm text-hot text-center font-medium sh5" data-role="">
                     <span class="font-medium ml-3 text-sm">Roles</span>
                     <span class="flex items-center pr-2 pointer-events-none">
                         <img src="icons/briefcase.png" alt="dropdown icon" class="w-5 h-5" />
                     </span>
                 </div>
-                <div id="user-roles" class="absolute  items-center justify-center text-sm mt-2 w-full top-8 sh5 ">
+                <div id="user-roles" class="absolute hidden items-center justify-center text-sm mt-2 w-full top-7 sh5 ">
                     <ul class="w-full items-center justify-center flex flex-col">
                         <li class="dropdown-item w-full items-center justify-center flex" data-role="Admin">
-                            <div class="flex items-center justify-center px-4 py-2 hover:bg-dark w-full text-white text-[0.75rem]">Admin</div>
+                            <div class="items-center justify-center px-4 py-2 hover:bg-dark w-full text-white text-[0.75rem]">CEO</div>
                         </li>
-                        <!-- Add more options as needed -->
+                        <li class="dropdown-item w-full items-center justify-center flex" data-role="Admin">
+                            <div class="items-center justify-center px-4 py-2 hover:bg-dark w-full text-white text-[0.75rem]">Admin</div>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="flex items-center justify-center mt-16">
-        <button id="add-user" class="flex items-center justify-center p-3 pl-5 sh19 sh4 rounded-full rounded-r-none">
-            <img class="w-5 h-5" src="icons/plus.png" alt="add" />
-        </button>
-        <button id="run-simulation" class="flex items-center justify-center p-3 pl-5 sh19 hover:sh4 rounded-full rounded-l">
-            <img class="w-5 h-5" src="icons/ai.png" alt="add" />
-        </button>
     </div>
     <div class="flex flex-col items-center justify-center w-full mt-10 space-y-4">
         <h2 class="text-bluehok w-full text-xs">Clients</h2>

@@ -20,7 +20,7 @@ export const getNumerologyValue = (name: string): number => {
 
     return value;
 };
-
+    
 
 export const getSymbolism = (num: number): string => {
     const symbolism: { [key: number]: string } = {

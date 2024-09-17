@@ -689,6 +689,14 @@ video {
   top: 100%;
 }
 
+.top-6 {
+  top: 1.5rem;
+}
+
+.top-7 {
+  top: 1.75rem;
+}
+
 .m-1 {
   margin: 0.25rem;
 }
@@ -1691,6 +1699,16 @@ select::-ms-expand {
 .hover\:bg-gray-200:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-darker:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(15 15 15 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-hot:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(235 57 99 / var(--tw-bg-opacity));
 }
 
 .hover\:sh4:hover {

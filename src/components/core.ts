@@ -30,7 +30,7 @@ const checkRoleMatch = (individual: Individual): string => {
     }
 };
 
-const deeperAnalysisInStartupContext = (individuals: Individual[]): void => {
+export const deeperAnalysisInStartupContext = (individuals: Individual[]): void => {
     individuals.forEach(individual => {
         console.log(`\nDeeper Analysis for ${individual.name}:`);
         console.log(`Symbolism: ${individual.symbolism}`);
@@ -46,5 +46,10 @@ const users: IUser[] = [
     { name: "John Doe", role: "Product Manager" }
 ];
 
-const individuals = processNames(users);
-deeperAnalysisInStartupContext(individuals);
+
+
+export const useYellowCore = (client:IUser[]) => (
+    const individuals = processNames(client);
+    deeperAnalysisInStartupContext(individuals);
+
+)
