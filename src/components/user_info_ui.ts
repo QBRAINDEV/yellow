@@ -4,9 +4,7 @@ import { useYellowCore } from "./core";
 let users: Individual[] = []; // Array to keep track of users
 
 export function handleAddUser(event: Event) {
-	const userNameInput = document.getElementById(
-		"user-name"
-	) as HTMLInputElement;
+	const userNameInput = document.getElementById("user-name") as HTMLInputElement;
 	const roleDropdown = document.getElementById("user-roles") as HTMLElement;
 
 	if (userNameInput && roleDropdown) {
@@ -68,46 +66,73 @@ export function renderUser(user: Individual) {
 		const userId = users.length - 1; // The index in the users array
 		userItem.setAttribute("data-user-id", userId.toString());
 
-		userItem.innerHTML = `
-         <div class=" flex items-center justify-normal w-full space-x-5 ">
-            
-            <div class="roles flex items-center justify-normal w-full space-x-5">
-				<div class="flex items-center justify-center px-4 py-2 text-white text-xs rounded-sm border sh5 border-hot">CEO</div>
-				<div class="flex items-center justify-center px-4 py-2 text-white text-xs rounded-sm border sh5 border-hot">CEO</div>
-				<div class="flex items-center justify-center px-4 py-2 text-white text-xs rounded-sm border sh5 border-hot">CEO</div>
-			</div>
-                <div class="remove-user-from-list hover:bg-darker w-6 h-6 mx-5 rounded-full flex items-center justify-center cursor-pointer mb-2 ml-auto" data-user-id="${userId}">
-                        <img src="icons/remove.png" alt="remove icon" class="w-5 h-5" />
-                </div>
-        </div>
+		// Function to render a single role
+		const renderRole = (role: string) => {
+			const container = document.createElement("div");
+			container.classList.add(
+				"flex",
+				"items-center",
+				"justify-center",
+				"px-4",
+				"py-2",
+				"text-white",
+				"text-xs",
+				"rounded-sm",
+				"border",
+				"sh5",
+				"border-hot"
+			);
+			container.textContent = role;
+			return container;
+		};
 
-        <div class="flex items-center justify-center w-full mt-5">
-        
-                <div class="user-name flex items-center justify-center text-white text-sm mr-auto"><span class="mx-3 text-xs text-bluehok">Role</span>${user.name}</div>
-                
-                
-                <div class="remove-user-from-list hover:bg-darker w-6 h-6 ml-5 rounded-full flex items-center justify-center cursor-pointer" data-user-id="${userId}">
-                    <img src="icons/approve.png" alt="remove icon" class="w-5 h-5" />
-                </div>
-            </div>
-            
-            <div class="flex items-center justify-self-auto w-full mt-5 text-white text-xs  ">
-                
-            <div class="flex itece justify-start w-full> 
-            ${user.symbolism}
-                
-                </div>   
-            </div>
-             <div class="text-xs text-greenhok w-full items-center justify-start ml-auto">${user.tarot}</div>
-                     
-        `;
+		// Function to render all roles
+		const renderAllRoles = (roles: string[]) => {
+			const rolesContainer = document.createElement("div");
+			roles.forEach(role => {
+				const roleElement = renderRole(role);
+				rolesContainer.appendChild(roleElement);
+			});
+			return rolesContainer;
+		};
+
+		// Create the user item HTML with roles rendered
+		userItem.innerHTML = `
+			<div class="flex items-center justify-normal w-full space-x-5">
+				<div class="roles flex items-center justify-normal w-full space-x-5">
+					<!-- The roles will be rendered here -->
+				</div>
+				<div class="remove-user-from-list hover:bg-darker w-6 h-6 mx-5 rounded-full flex items-center justify-center cursor-pointer mb-2 ml-auto" data-user-id="${userId}">
+					<img src="icons/remove.png" alt="remove icon" class="w-5 h-5" />
+				</div>
+			</div>
+
+			<div class="flex items-center justify-center w-full mt-5">
+				<div class="user-name flex items-center justify-center text-white text-sm mr-auto"><span class="mx-3 text-xs text-bluehok">Client : </span>${user.name}</div>
+				<div class="user-name flex items-center justify-center text-white text-sm mr-auto"><span class="mx-3 text-xs text-bluehok">Requested role : </span>${user.temporaryRole}</div>
+				
+				<div class="remove-user-from-list hover:bg-darker w-6 h-6 ml-5 rounded-full flex items-center justify-center cursor-pointer" data-user-id="${userId}">
+					<img src="icons/approve.png" alt="approve icon" class="w-5 h-5" />
+				</div>
+			</div>
+
+			<div class="flex items-center justify-self-auto w-full mt-5 text-white text-xs  flex-col">
+				<div class="text-xs text-greenhok w-full items-center justify-start ml-auto">${user.symbolism}</div>
+				<div class="text-xs text-white w-full items-center justify-start ml-auto">${user.tarot}</div>
+			</div>
+		`;
+
+		// Append roles to the corresponding container
+		const rolesContainer = userItem.querySelector(".roles");
+		if (rolesContainer && user.idealRoles) {
+			const allRolesElement = renderAllRoles(user.idealRoles);
+			rolesContainer.appendChild(allRolesElement);
+		}
 
 		usersList.appendChild(userItem);
 
 		// Add event listener to remove the user when the remove icon is clicked
-		const removeBtn = userItem.querySelector(
-			".remove-user-from-list"
-		) as HTMLElement;
+		const removeBtn = userItem.querySelector(".remove-user-from-list") as HTMLElement;
 		if (removeBtn) {
 			removeBtn.addEventListener("click", () => removeUser(userId));
 		}
@@ -116,9 +141,7 @@ export function renderUser(user: Individual) {
 
 // Function to remove a user from the list and the DOM
 export function removeUser(userId: number) {
-	const userItem = document.querySelector(
-		`[data-user-id="${userId}"]`
-	) as HTMLElement;
+	const userItem = document.querySelector(`[data-user-id="${userId}"]`) as HTMLElement;
 
 	if (userItem) {
 		userItem.remove(); // Remove the user from the DOM
@@ -136,9 +159,7 @@ function updateUserList() {
 	const userItems = document.querySelectorAll(".user-info");
 	userItems.forEach((item, index) => {
 		item.setAttribute("data-user-id", index.toString());
-		const removeBtn = item.querySelector(
-			".remove-user-from-list"
-		) as HTMLElement;
+		const removeBtn = item.querySelector(".remove-user-from-list") as HTMLElement;
 		removeBtn.setAttribute("data-user-id", index.toString());
 	});
 }

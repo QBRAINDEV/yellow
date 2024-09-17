@@ -1,4 +1,4 @@
-import { IUser, Individual } from "../types/user";
+import { Individual } from "../types/user";
 import {
 	getNumerologyValue,
 	getSymbolism,
@@ -6,7 +6,7 @@ import {
 	tarotDescriptionByNumerology,
 } from "../utils/numerology";
 
-const processNames = (users: IUser[]): Individual[] => {
+const processNames = (users: Individual[]): Individual[] => {
 	const analytics:Individual[] = []
      users.map((user) => {
 		const value = getNumerologyValue(user.name);
@@ -14,7 +14,6 @@ const processNames = (users: IUser[]): Individual[] => {
 		const idealRoles = rolesByNumerology(value);
 		const tarot = tarotDescriptionByNumerology(value);
 		const symbolism = getSymbolism(value);
-
 		analytics.push({
 			name: user.name,
 			value,
@@ -39,7 +38,7 @@ export const deeperAnalysisInStartupContext = (
 	});
 };
 
-export const useYellowCore = (clients: IUser[]) => {
+export const useYellowCore = (clients: Individual[]) => {
     let list = processNames(clients)
 	return deeperAnalysisInStartupContext(list);
 };
