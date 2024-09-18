@@ -106,29 +106,34 @@ export function renderUser(user: Individual) {
 
 		// Create the user item HTML with roles rendered
 		userItem.innerHTML = `
-			<div class="flex items-center justify-normal w-full space-x-5">
-				<div class="roles flex items-center justify-normal w-full space-x-5">
-					<!-- The roles will be rendered here -->
-				</div>
-				<div class="remove-user-from-list hover:bg-darker w-6 h-6 mx-5 rounded-full flex items-center justify-center cursor-pointer mb-2 ml-auto" data-user-id="${userId}">
-					<img src="icons/remove.png" alt="remove icon" class="w-5 h-5" />
-				</div>
-			</div>
+    <div class="flex items-center justify-normal w-full space-x-5">
+        <div class="roles flex items-center justify-normal w-full space-x-5">
+            <!-- The roles will be rendered here -->
+        </div>
+        <div class="remove-user-from-list hover:bg-darker w-6 h-6 mx-5 rounded-full flex items-center justify-center cursor-pointer mb-2 ml-auto" data-user-id="${userId}">
+            <img src="icons/remove.png" alt="remove icon" class="w-5 h-5" />
+        </div>
+    </div>
 
-			<div class="flex items-center justify-center w-full mt-5">
-				<div class="user-name flex items-center justify-center text-white text-sm mr-auto"><span class="mx-3 text-xs text-bluehok">Client : </span>${user.name}</div>
-				<div class="user-name flex items-center justify-center text-white text-sm mr-auto"><span class="mx-3 text-xs text-bluehok">Requested role : </span>${user.temporaryRole}</div>
-				
-				<div class="remove-user-from-list hover:bg-darker w-6 h-6 ml-5 rounded-full flex items-center justify-center cursor-pointer" data-user-id="${userId}">
-					<img src="icons/approve.png" alt="approve icon" class="w-5 h-5" />
-				</div>
-			</div>
+    <div class="flex items-center justify-center w-full mt-5">
+        <div class="user-name flex items-center justify-center text-white text-sm mr-auto">
+            <span class="mx-3 text-xs text-bluehok">Client : </span>${user.name}
+        </div>
+        <div class="user-name flex items-center justify-center text-white text-sm mr-auto">
+            <span class="mx-3 text-xs text-bluehok">Requested role : </span>${user.temporaryRole}
+        </div>
+        
+        <div class="remove-user-from-list hover:bg-darker w-6 h-6 ml-5 rounded-full flex items-center justify-center cursor-pointer" data-user-id="${userId}">
+            ${user.match ? `<img src="icons/validated.png" alt="approve icon" class="w-5 h-5 rotate-180" />` : `<img src="icons/rejected.png" alt="rejected icon" class="w-5 h-5 rotate-180" />`}
+        </div>
+    </div>
 
-			<div class="flex items-center justify-self-auto w-full mt-5 text-white text-sm  flex-col">
-				<div class=" text-greenhok w-full items-center justify-start ml-auto">${user.symbolism}</div>
-				<div class=" text-white w-full items-center justify-start ml-auto">${user.tarot}</div>
-			</div>
-		`;
+    <div class="flex items-center justify-self-auto w-full mt-5 text-white text-sm flex-col">
+        <div class="text-greenhok w-full items-center justify-start ml-auto">${user.symbolism}</div>
+        <div class="text-white w-full items-center justify-start ml-auto">${user.tarot}</div>
+    </div>
+`;
+
 
 		// Append roles to the corresponding container
 		const rolesContainer = userItem.querySelector(".roles");
