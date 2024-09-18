@@ -56,7 +56,7 @@ export function renderUser(user: Individual) {
 			"w-full",
 			"items-center",
 			"justify-start",
-			"sh4",
+			"sh19",
 			"py-2",
 			"px-3",
 			"flex-col"
@@ -79,8 +79,9 @@ export function renderUser(user: Individual) {
 				"text-xs",
 				"rounded-sm",
 				"border",
-				"sh5",
-				"border-hot"
+				"border-hot",
+                "sh19",
+                "p-3"
 			);
 			container.textContent = role;
 			return container;
@@ -89,6 +90,13 @@ export function renderUser(user: Individual) {
 		// Function to render all roles
 		const renderAllRoles = (roles: string[]) => {
 			const rolesContainer = document.createElement("div");
+            rolesContainer.classList.add(
+				"flex",
+				"items-center",
+				"justify-center",
+				"space-x-3",
+                
+			);
 			roles.forEach(role => {
 				const roleElement = renderRole(role);
 				rolesContainer.appendChild(roleElement);
@@ -116,9 +124,9 @@ export function renderUser(user: Individual) {
 				</div>
 			</div>
 
-			<div class="flex items-center justify-self-auto w-full mt-5 text-white text-xs  flex-col">
-				<div class="text-xs text-greenhok w-full items-center justify-start ml-auto">${user.symbolism}</div>
-				<div class="text-xs text-white w-full items-center justify-start ml-auto">${user.tarot}</div>
+			<div class="flex items-center justify-self-auto w-full mt-5 text-white text-sm  flex-col">
+				<div class=" text-greenhok w-full items-center justify-start ml-auto">${user.symbolism}</div>
+				<div class=" text-white w-full items-center justify-start ml-auto">${user.tarot}</div>
 			</div>
 		`;
 
