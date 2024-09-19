@@ -25,7 +25,7 @@ export function handleAddUser(event: Event) {
 		const selectedRole = clickedItem.getAttribute("data-role") || "";
 
 		if (name && selectedRole) {
-			const user = { name, role: selectedRole } as Individual;
+			const user = { name, temporaryRole: selectedRole } as Individual;
 			users.push(user); // Add user to the array
 			users = useYellowCore(users);
 
@@ -51,7 +51,6 @@ export function toggleDropdown() {
 // Function to render a user in the list
 export function renderUser(user: Individual) {
     const usersList = document.getElementById("users-list") as HTMLElement;
-
     if (usersList) {
         const userItem = document.createElement("div");
         userItem.classList.add(
@@ -151,52 +150,37 @@ export function renderUser(user: Individual) {
        // Render compatibility analysis
 const compatibilityContainer = document.createElement("div");
 compatibilityContainer.classList.add("client-analysis", "flex", "flex-col", "w-full", "space-y-5", "bg-darken", "rounded-full", "text-sm", "text-white", "mt-10");
-
-user.compatibility.forEach((client: CompatibilityResult) => {
-    // Create a new div for each client's analysis
+console.log(user)
+user.compatibility.forEach((result: CompatibilityResult) => {
     const clientAnalysisDiv = document.createElement("div");
-    clientAnalysisDiv.classList.add("client-analysis-item", "flex", "items-center", "justify-between", "p-3", "bg-darker", "rounded", "space-x-3"); // Add space-x-3 for horizontal spacing
+    clientAnalysisDiv.classList.add("client-analysis-item", "flex", "items-center", "justify-between", "p-3", "bg-darker", "rounded", "space-x-3");
+
     const clientAnalysis = `
-        <div class="flex items-center space-x-2 w-full"> <!-- Ensure space between name and icon -->
+        <div class="flex items-center space-x-2 w-full">
             <div class="individual-match flex items-center space-x-2">
-                ${
-                    client.match
-                        ? `<img src="icons/validated.png" alt="approve icon" class="w-5 h-5 rotate-180" />`
-                        : `<img src="icons/rejected.png" alt="rejected icon" class="w-5 h-5 rotate-180" />`
-                }
+                ${result.match ? `<img src="icons/validated.png" alt="approve icon" class="w-5 h-5 rotate-180" />` : `<img src="icons/rejected.png" alt="rejected icon" class="w-5 h-5 rotate-180" />`}
             </div>
-            <div class="flex-grow">${capitalizeFirstLetter(client.individualB)}</div>
+            <div class="flex-grow">${capitalizeFirstLetter(result.individualB)}</div>
         </div>
         <div class="client-match-score flex items-center space-x-2" style="min-width: 80px;">
             <img src="icons/rank.png" alt="dropdown icon" class="w-5 h-5" />
-            <div class="text-yellow">${client.score}</div>
+            <div class="text-yellow">${result.score}</div>
         </div>
         <div class="client-score flex items-center space-x-2" style="min-width: 80px;">
             <div>Harmony</div>
-            ${
-                client.factors.symbolismMatch
-                    ? `<img src="icons/harmony.png" alt="dropdown icon" class="w-5 h-5" />`
-                    : `<img src="icons/trouble.png" alt="dropdown icon" class="w-5 h-5" />`
-            }
+            ${result.factors.symbolismMatch ? `<img src="icons/harmony.png" alt="dropdown icon" class="w-5 h-5" />` : `<img src="icons/trouble.png" alt="dropdown icon" class="w-5 h-5" />`}
         </div>
         <div class="client-matching-compatibility flex items-center space-x-2" style="min-width: 80px;">
             <div class="roleCompatibility">Hire</div>
-            ${
-                client.factors.roleCompatibility
-                    ? `<img src="icons/ai.png" alt="dropdown icon" class="w-5 h-5" />`
-                    : `<img src="icons/error.png" alt="dropdown icon" class="w-5 h-5" />`
-            }
+            ${result.factors.roleCompatibility ? `<img src="icons/ai.png" alt="dropdown icon" class="w-5 h-5" />` : `<img src="icons/error.png" alt="dropdown icon" class="w-5 h-5" />`}
         </div>
         <div class="client-score flex items-center space-x-2" style="min-width: 80px;">
             <img src="icons/team.png" alt="team" class="w-5 h-5" />
-            <div class="text-white">${client.factors.valueDifference}</div>
+            <div class="text-white">${result.factors.valueDifference}</div>
         </div>
     `;
 
-    // Set the inner HTML of the client analysis div
     clientAnalysisDiv.innerHTML = clientAnalysis;
-
-    // Append the client analysis div to the compatibility container
     compatibilityContainer.appendChild(clientAnalysisDiv);
 });
 

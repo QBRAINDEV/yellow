@@ -2,115 +2,83 @@ import { Individual } from "../types/user";
 
 export const clientMock: Individual[] = [
     {
-      name: "John",
-      role: "CEO",
-      temporaryRole: "CEO",
-      value: 7,
-      symbolism: "Visionary",
-      tarot: "The Sun",
-      idealRoles: ["CEO", "Leader"],
-      compatibility: [
-        { individualA: "John", individualB: "Alice", match: true, score: 6, factors: {} as any },
-        { individualA: "John", individualB: "Bob", match: false, score: 3, factors: {} as any },
-      ]
+        "name": "John",
+        "role": "CEO",
+        "temporaryRole": "CEO",
+        "value": 7,
+        "symbolism": "Visionary",
+        "tarot": "The Sun",
+        "idealRoles": ["CEO", "Leader"],
+        "compatibility": [
+            { "individualA": "John", "individualB": "Alice", "match": true, "score": 6, "factors": {} },
+            { "individualA": "John", "individualB": "Bob", "match": false, "score": 3, "factors": {} }
+        ]
     },
     {
-      name: "Alice",
-      role: "CFO",
-      temporaryRole: "CFO",
-      value: 5,
-      symbolism: "Strategist",
-      tarot: "The Moon",
-      idealRoles: ["CFO", "Planner"],
-      compatibility: [
-        { individualA: "Alice", individualB: "John", match: true, score: 6, factors: {} as any },
-        { individualA: "Alice", individualB: "Bob", match: false, score: 2, factors: {} as any },
-      ]
+        "name": "Manuel",
+        "role": "CEO",
+        "temporaryRole": "CEO",
+        "value": 7,
+        "symbolism": "Visionary",
+        "tarot": "The Sun",
+        "idealRoles": ["CEO", "Leader"],
+        "compatibility": [
+            { "individualA": "John", "individualB": "Alice", "match": true, "score": 6, "factors": {} },
+            { "individualA": "John", "individualB": "Bob", "match": false, "score": 3, "factors": {} }
+        ]
     },
     {
-      name: "Bob",
-      role: "Product Manager",
-      temporaryRole: "CTO",
-      value: 8,
-      symbolism: "Innovator",
-      tarot: "The Star",
-      idealRoles: ["CTO", "Technologist"],
-      compatibility: [
-        { individualA: "Bob", individualB: "John", match: false, score: 3, factors: {} as any },
-        { individualA: "Bob", individualB: "Alice", match: false, score: 2, factors: {} as any },
-      ]
+        "name": "Alice",
+        "role": "CFO",
+        "temporaryRole": "CFO",
+        "value": 5,
+        "symbolism": "Strategist",
+        "tarot": "The Moon",
+        "idealRoles": ["CFO", "Planner"],
+        "compatibility": [
+            { "individualA": "Alice", "individualB": "John", "match": true, "score": 6, "factors": {} },
+            { "individualA": "Alice", "individualB": "Bob", "match": false, "score": 2, "factors": {} }
+        ]
     },
-    ...Array.from({ length: 97 }, (_, i) => {
-      const name = `Individual${i + 4}`;
-      const roles = [
-        "Developer",
-        "Sales Manager",
-        "UX Designer",
-        "Marketing Manager",
-        "Operations Manager",
-        "HR Manager",
-        "Customer Success",
-        "Data Analyst",
-        "DevOps Engineer",
-        "UI Designer",
-        "Legal Advisor",
-        "Accountant",
-        "Finance Manager",
-        "Business Analyst",
-        "Content Writer",
-        "Social Media Manager",
-        "Product Designer",
-        "Full-Stack Developer",
-        "Mobile Developer",
-        "Backend Engineer",
-        "Frontend Developer",
-        "IT Support",
-        "Community Manager",
-        "Supply Chain Manager",
-        "Brand Manager",
-        "Tech Lead",
-        "Research Scientist",
-        "Cybersecurity Analyst",
-        "Public Relations Specialist",
-        "Partnership Manager",
-        "Growth Hacker",
-      ];
-      
-      const role = roles[Math.floor(Math.random() * roles.length)];
-      const tarotCards = [
-        "The Magician", "The High Priestess", "The Empress", "The Emperor", "The Hierophant",
-        "The Lovers", "The Chariot", "Strength", "The Hermit", "The Wheel of Fortune",
-        "Justice", "The Hanged Man", "Death", "Temperance", "The Devil", "The Tower", "The Star",
-        "The Moon", "The Sun", "Judgement", "The World"
-      ];
-  
-      const tarot = tarotCards[Math.floor(Math.random() * tarotCards.length)];
-      const symbolism = [
-        "Leader", "Innovator", "Strategist", "Problem Solver", "Creative Thinker", "Visionary",
-        "Diplomat", "Risk Taker", "Communicator", "Technologist", "Analyst", "Team Player"
-      ];
-  
-      const individualSymbolism = symbolism[Math.floor(Math.random() * symbolism.length)];
-  
-      // Creating random compatibility with existing individuals
-      const randomCompatibilities = [
-        { individualA: name, individualB: "John", match: Math.random() < 0.5, score: Math.floor(Math.random() * 10) + 1, factors: {} as any },
-        { individualA: name, individualB: "Alice", match: Math.random() < 0.5, score: Math.floor(Math.random() * 10) + 1, factors: {} as any },
-        { individualA: name, individualB: "Bob", match: Math.random() < 0.5, score: Math.floor(Math.random() * 10) + 1, factors: {} as any },
-      ];
-  
-      return {
-        name,
-        role,
-        temporaryRole: role,
-        value: Math.floor(Math.random() * 10) + 1,
-        symbolism: individualSymbolism,
-        tarot,
-        idealRoles: [role],
-        compatibility: randomCompatibilities
-      };
-    })
-  ];
-  
-
-  
+    {
+        "name": "Bob",
+        "role": "Product Manager",
+        "temporaryRole": "CTO",
+        "value": 8,
+        "symbolism": "Innovator",
+        "tarot": "The Star",
+        "idealRoles": ["CTO", "Technologist"],
+        "compatibility": [
+            { "individualA": "Bob", "individualB": "John", "match": false, "score": 3, "factors": {} },
+            { "individualA": "Bob", "individualB": "Alice", "match": false, "score": 2, "factors": {} }
+        ]
+    },
+    {
+        "name": "Individual4",
+        "role": "Developer",
+        "temporaryRole": "Developer",
+        "value": 3,
+        "symbolism": "Analyst",
+        "tarot": "The Lovers",
+        "idealRoles": ["Developer"],
+        "compatibility": [
+            { "individualA": "Individual4", "individualB": "John", "match": true, "score": 7, "factors": {} },
+            { "individualA": "Individual4", "individualB": "Alice", "match": false, "score": 4, "factors": {} },
+            { "individualA": "Individual4", "individualB": "Bob", "match": true, "score": 5, "factors": {} }
+        ]
+    },
+    {
+        "name": "Individual5",
+        "role": "Sales Manager",
+        "temporaryRole": "Sales Manager",
+        "value": 6,
+        "symbolism": "Leader",
+        "tarot": "The Moon",
+        "idealRoles": ["Sales Manager"],
+        "compatibility": [
+            { "individualA": "Individual5", "individualB": "John", "match": false, "score": 3, "factors": {} },
+            { "individualA": "Individual5", "individualB": "Alice", "match": true, "score": 8, "factors": {} },
+            { "individualA": "Individual5", "individualB": "Bob", "match": false, "score": 2, "factors": {} }
+        ]
+    }
+]
