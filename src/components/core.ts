@@ -1,5 +1,6 @@
 import { Individual, CompatibilityResult } from "../types/user";
 import { adaneAstrology } from "../utils/adaneAstrology";
+import { clientMock } from "../utils/clients-mock";
 import {
 	getNumerologyValue,
 	getSymbolism,
@@ -10,19 +11,20 @@ import { renderGraph } from "./compatibility-graph";
 
 const processNames = (users: Individual[]): Individual[] => {
 	const analytics: Individual[] = [];
-	users.map((user) => {
+	users.forEach((user) => {
 		const value = getNumerologyValue(user.name);
 		const temporaryRole = user.role; // Use the role provided in the IUser object
 		const idealRoles = rolesByNumerology(value);
 		const tarot = tarotDescriptionByNumerology(value);
 		const symbolism = getSymbolism(value);
 		analytics.push({
-			name: user.name,
+			...user, // Keep existing user properties
 			value,
 			temporaryRole,
 			symbolism,
 			tarot,
 			idealRoles,
+			compatibility: [], // Initialize compatibility as an empty array
 		} as Individual);
 	});
 	return analytics;
@@ -86,7 +88,6 @@ export const analyzeTeamCompatibility = (
 					roleCompatibility &&
 					valueDifference <= 1 &&
 					tarotComparison.isCompatible;
-
 				// Create the CompatibilityResult object
 				const compatibilityResult: CompatibilityResult = {
 					individualA: individualA.name,
@@ -107,15 +108,14 @@ export const analyzeTeamCompatibility = (
 		});
 
 		// Add the compatibility array to each individual's object
-		individualA.compatibility = compatibilityList;
+		individualA.compatibility = compatibilityList; // Ensure compatibility is updated
 	});
 
 	return analytics;
 };
 
 export const useYellowCore = (clients: Individual[]) => {
-	const clientAnalytics = deeperAnalysisInStartupContext(processNames(clients));
+	const clientAnalytics = deeperAnalysisInStartupContext(processNames(clientMock));
 	const clientMatchingGraph = analyzeTeamCompatibility(clientAnalytics);
-    renderGraph(clientMatchingGraph)
-	return clientAnalytics;
+	return clientMatchingGraph;
 };
