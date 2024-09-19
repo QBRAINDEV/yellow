@@ -148,60 +148,59 @@ export function renderUser(user: Individual) {
         }
 
         // Render compatibility analysis
-        const compatibilityContainer = document.createElement("div");
-        compatibilityContainer.classList.add("client-analysis", "flex", "flex-col", "w-full", "space-y-5", "bg-darken", "rounded-full", "text-sm", "text-white");
+       // Render compatibility analysis
+const compatibilityContainer = document.createElement("div");
+compatibilityContainer.classList.add("client-analysis", "flex", "flex-col", "w-full", "space-y-5", "bg-darken", "rounded-full", "text-sm", "text-white", "mt-10");
 
-        user.compatibility.forEach((client: CompatibilityResult) => {
-            // Create a new div for each client's analysis
-            const clientAnalysisDiv = document.createElement("div");
-            clientAnalysisDiv.classList.add("client-analysis-item", "flex", "p-3", "bg-gray-800", "rounded"); // Customize classes as needed
+user.compatibility.forEach((client: CompatibilityResult) => {
+    // Create a new div for each client's analysis
+    const clientAnalysisDiv = document.createElement("div");
+    clientAnalysisDiv.classList.add("client-analysis-item", "flex", "items-center", "justify-between", "p-3", "bg-darker", "rounded", "space-x-3"); // Add space-x-3 for horizontal spacing
+    const clientAnalysis = `
+        <div class="flex items-center space-x-2 w-full"> <!-- Ensure space between name and icon -->
+            <div class="individual-match flex items-center space-x-2">
+                ${
+                    client.match
+                        ? `<img src="icons/validated.png" alt="approve icon" class="w-5 h-5 rotate-180" />`
+                        : `<img src="icons/rejected.png" alt="rejected icon" class="w-5 h-5 rotate-180" />`
+                }
+            </div>
+            <div class="flex-grow">${capitalizeFirstLetter(client.individualB)}</div>
+        </div>
+        <div class="client-match-score flex items-center space-x-2" style="min-width: 80px;">
+            <img src="icons/rank.png" alt="dropdown icon" class="w-5 h-5" />
+            <div class="text-yellow">${client.score}</div>
+        </div>
+        <div class="client-score flex items-center space-x-2" style="min-width: 80px;">
+            <div>Harmony</div>
+            ${
+                client.factors.symbolismMatch
+                    ? `<img src="icons/harmony.png" alt="dropdown icon" class="w-5 h-5" />`
+                    : `<img src="icons/trouble.png" alt="dropdown icon" class="w-5 h-5" />`
+            }
+        </div>
+        <div class="client-matching-compatibility flex items-center space-x-2" style="min-width: 80px;">
+            <div class="roleCompatibility">Hire</div>
+            ${
+                client.factors.roleCompatibility
+                    ? `<img src="icons/ai.png" alt="dropdown icon" class="w-5 h-5" />`
+                    : `<img src="icons/error.png" alt="dropdown icon" class="w-5 h-5" />`
+            }
+        </div>
+        <div class="client-score flex items-center space-x-2" style="min-width: 80px;">
+            <img src="icons/team.png" alt="team" class="w-5 h-5" />
+            <div class="text-white">${client.factors.valueDifference}</div>
+        </div>
+    `;
 
-            const clientAnalysis = `
-                <div class="flex items-center justify-center space-x-3 w-full ">
-                    <div class="">${capitalizeFirstLetter(client.individualB)}</div>
-                    <div class="individual-match flex items-center justify-center space-x-5">
-                        ${
-                            client.match
-                                ? `<img src="icons/validated.png" alt="approve icon" class="w-8 h-8 rotate-180" />`
-                                : `<img src="icons/rejected.png" alt="rejected icon" class="w-8 h-8 rotate-180" />`
-                        }
-                    </div>
-                    <div class="client-match-score flex items-center justify-center space-x-3">
-                        <img src="icons/rank.png" alt="dropdown icon" class="w-8 h-8" />
-                        <div class="text-yellow ">${client.score}</div>
-                    </div>
-                </div>
+    // Set the inner HTML of the client analysis div
+    clientAnalysisDiv.innerHTML = clientAnalysis;
 
-                <div class="client-score flex items-center justify-center space-x-5">
-                    <div>Harmony</div>
-                    ${
-                        client.factors.symbolismMatch
-                            ? `<img src="icons/harmony.png" alt="dropdown icon" class="w-8 h-8" />`
-                            : `<img src="icons/trouble.png" alt="dropdown icon" class="w-8 h-8" />`
-                    }
-                </div>
+    // Append the client analysis div to the compatibility container
+    compatibilityContainer.appendChild(clientAnalysisDiv);
+});
 
-                <div class="client-matching-compatibility flex items-center justify-center space-x-5">
-                    <div class="roleCompatibility">Understanding</div>
-                    ${
-                        client.factors.roleCompatibility
-                            ? `<img src="icons/ai.png" alt="dropdown icon" class="w-8 h-8" />`
-                            : `<img src="icons/error.png" alt="dropdown icon" class="w-8 h-8" />`
-                    }
-                </div>
 
-                <div class="client-score flex items-center w-full flex-col space-x-3">
-                    <img src="icons/team.png" alt="team" class="w-8 h-8" />
-                    <div class="text-white">${client.factors.valueDifference}</div>
-                </div>
-            `;
-
-            // Set the inner HTML of the client analysis div
-            clientAnalysisDiv.innerHTML = clientAnalysis;
-
-            // Append the client analysis div to the compatibility container
-            compatibilityContainer.appendChild(clientAnalysisDiv);
-        });
 
         userItem.appendChild(compatibilityContainer);
 
